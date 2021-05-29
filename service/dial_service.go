@@ -8,7 +8,7 @@ import (
 )
 
 func Dial() (mobilePb.MobileServiceClient, error) {
-	conn, err := grpc.Dial("172.17.0.2:8080", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:8080", grpc.WithInsecure())
 	if err != nil {
 		return nil, logError(status.Errorf(codes.Internal, "cannot dial mobile search service", err))
 	}

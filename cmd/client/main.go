@@ -114,7 +114,7 @@ func main() {
 }
 
 func Dial() (mobilePb.MobileServiceClient, error) {
-	conn, err := grpc.Dial("localhost:9080", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:8080", grpc.WithInsecure())
 	if err != nil {
 		return nil, err
 	}

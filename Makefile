@@ -22,13 +22,13 @@ clean:
 	rm -r pb/*.go swagger/*
 
 server:
-	go run cmd/server/main.go --port 8080
+	go run cmd/server/main.go --port 8082
 
 rest:
 	go run cmd/server/main.go --port 8082 --type rest --endpoint 0.0.0.0:8080
 
 client:
-	go run cmd/client/main.go --address localhost:9020
+	go run cmd/client/main.go --address localhost:8082
 
 
 build-image:
