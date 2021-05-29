@@ -1,0 +1,120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "image_service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ImageService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/mobile/upload_image": {
+      "post": {
+        "operationId": "ImageService_UploadImage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUploadImageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUploadImageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImageService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "pbImageInfo": {
+      "type": "object",
+      "properties": {
+        "mobileId": {
+          "type": "string"
+        },
+        "imageType": {
+          "type": "string"
+        }
+      }
+    },
+    "pbUploadImageRequest": {
+      "type": "object",
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/pbImageInfo"
+        },
+        "chunkData": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbUploadImageResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

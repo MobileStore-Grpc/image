@@ -1,0 +1,30 @@
+syntax = "proto3";
+package pb;
+option go_package = "github.com/MobileStore-Grpc/image/pb";
+import "google/api/annotations.proto";
+
+message UploadImageRequest {
+  oneof data {
+    ImageInfo info = 1;
+    bytes chunk_data = 2;
+  }
+}
+
+message ImageInfo {
+  string mobile_id = 1;
+  string image_type = 2;
+}
+
+message UploadImageResponse {
+  string id = 1;
+  uint32 size = 2;
+}
+
+service ImageService {
+  rpc UploadImage(stream UploadImageRequest) returns (UploadImageResponse) {
+    option (google.api.http) = {
+      post : "/v1/mobile/upload_image"
+      body : "*"
+    };
+  };
+}
